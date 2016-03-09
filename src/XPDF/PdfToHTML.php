@@ -120,7 +120,7 @@ class PdfToHTML extends AbstractBinary
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $commands[] = '-s';
+        $commands[] = '-c';
         $commands[] = '-i';
         $commands[] = '-noframes';
         $commands[] = '-enc';
