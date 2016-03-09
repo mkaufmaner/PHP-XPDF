@@ -34,7 +34,6 @@ class PdfToHTML extends AbstractBinary
 {
     private $charset = 'UTF-8';
     private $pages;
-    private $output_mode = '-raw';
 
     /**
      * {@inheritdoc}
@@ -87,34 +86,6 @@ class PdfToHTML extends AbstractBinary
     }
 
     /**
-     * Set the output formatting mode
-     *
-     * @param string $mode
-     * 
-     * @return PdfToHTML
-     *
-     * Valid modes are "raw" and "layout"
-     */
-    public function setOutputMode($mode)
-    {
-        switch (strtolower($mode)) {
-            case 'raw':
-            case '-raw':
-                $this->output_mode = '-raw';
-                break;
-            case 'layout':
-            case '-layout':
-                $this->output_mode = '-layout';
-                break;
-            default:
-                throw new InvalidArgumentException('Mode must be "raw" or "layout"');
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
      * Extracts the html of the current open PDF file, if not page start/end
      * provided, etxract all pages.
      *
@@ -149,7 +120,6 @@ class PdfToHTML extends AbstractBinary
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'xpdf');
 
-        $commands[] = $this->output_mode;
         $commands[] = '-s';
         $commands[] = '-i';
         $commands[] = '-noframes';
